@@ -14,7 +14,7 @@ A desktop application built using `wxPython` and `matplotlib` for calculating Bo
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/your-repo/bmi-calculator.git
+    git clone https://github.com/DrKnallfrosch/BMI-CALC.git
     cd bmi-calculator
     ```
 
