@@ -20,13 +20,11 @@ A desktop application built using `wxPython` and `matplotlib` for calculating Bo
 
 2. Install the required dependencies:
     ```bash
-    pip install wxPython matplotlib
+    pip install -r requirements.txt
     ```
 
 3. Run the application:
-    ```bash
-    python app.py
-    ```
+    - Simply Run the BMI-Frame.py file
 
 ## Usage
 
@@ -42,11 +40,6 @@ A desktop application built using `wxPython` and `matplotlib` for calculating Bo
    - BMI value, category, and ideal weight range are dynamically displayed.
    - A graphical scale highlights your BMI in the category chart.
 
-### Additional Features
-
-- Enable or disable age input using the checkbox.
-- Adjust age using the spin box or slider.
-
 ## Code Overview
 
 ### Main Components
@@ -60,46 +53,7 @@ A desktop application built using `wxPython` and `matplotlib` for calculating Bo
 3. **`BmiCalc`**:
    - Backend class for BMI calculations and category determination.
 
-### Key Methods
-
-- `on_unit_change`: Handles unit conversions between Metric and Imperial systems.
-- `update_results`: Updates the displayed BMI results, category, and ideal weight.
-- `paint_scale`: Draws the BMI category scale using `matplotlib`.
-
-## BMI Categories
-
-The application uses the following BMI categories based on sex:
-
-| Category              | Male BMI Range | Female BMI Range | Default BMI Range |
-|-----------------------|----------------|------------------|-------------------|
-| Underweight           | 0–20          | 0–19            | 0–18.5           |
-| Normal weight         | 20–25         | 19–24           | 18.5–25          |
-| Overweight            | 25–30         | 24–30           | 25–30            |
-| Obesity I             | 30–35         | 30–35           | 30–35            |
-| Obesity II            | 35–40         | 35–40           | 35–40            |
-| Obesity III           | >40           | >40             | >40              |
-
-## Contributing
-
-1. Fork the repository.
-2. Create a new branch:
-    ```bash
-    git checkout -b feature-name
-    ```
-3. Commit your changes:
-    ```bash
-    git commit -m "Description of changes"
-    ```
-4. Push to the branch:
-    ```bash
-    git push origin feature-name
-    ```
-5. Open a pull request.
-
-## License
-
-This project is licensed under the MIT License. See the `LICENSE` file for details.
-
----
 
 Feel free to contribute or report issues!
+
+© 2025 D0ms-0; DrKnallfrosch
