@@ -7,8 +7,7 @@ A desktop application built using `wxPython` and `matplotlib` for calculating Bo
 - Supports both Metric (cm, kg) and Imperial (ft, lb) units.
 - Dynamic BMI result updates on input changes.
 - Visual representation of BMI categories with a scale.
-- Optional inclusion of age and sex to refine BMI category results.
-- Displays ideal weight range based on age and BMI.
+- Optional inclusion of age and sex to get better fitting results for the ideal weight.
 
 ## Installation
 
