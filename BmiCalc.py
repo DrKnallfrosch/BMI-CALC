@@ -127,19 +127,20 @@ class BmiCalc:
             print("Weight must be greater than 0")
 
     def get_ideal_weight(self) -> float:
-        """ calculate ideal weight
+        """ calculate ideal weight if self is not None then calculate ideal weight with the CREFF formula else with the
+        BMI formula. The CREFF formula is only for adults and is use the Body Normal type.
         :return:  in kg
         :rtype: float
         """
-        if self.age is not None:
-            if self.sex == 'm':
-                return 50 + 0.9 * ((self.height * 100) - 152.4) - 0.2 * self.age
+        try:
+            if self.age is not None:
+                return ((self.height * 100) - 100) + (self.age/10) * 0.9
+            elif self.sex == 'm':
+                return 22.5 * (self.height ** 2)
             elif self.sex == 'f':
-                return 45.5 + 0.9 * ((self.height * 100) - 152.4) - 0.1 * self.age
-        elif self.sex == 'm':
-            return 22.5
-        elif self.sex == 'f':
-            return 21.5
+                return 21.5 * (self.height ** 2)
+        except ZeroDivisionError:
+            pass
 
 
 if __name__ == '__main__':
