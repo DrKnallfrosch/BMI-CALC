@@ -1,6 +1,5 @@
 import wx
 import matplotlib.pyplot as plt
-from fontTools.misc.textTools import caselessSort
 from matplotlib.backends.backend_wxagg import FigureCanvasWxAgg as FigureCanvas
 from BmiCalc import BmiCalc
 

@@ -1,4 +1,3 @@
-from multiprocessing.managers import Value
 from typing import Optional
 
 
@@ -98,6 +97,7 @@ class BmiCalc:
         """
         if sex not in (None, 'm', 'f'):
             raise ValueError("Sex must be either None, 'm' 'f'")
+        self.sex = sex
 
     def get_size(self) -> float:
         """ get current size
