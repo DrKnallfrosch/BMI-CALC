@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BmiCalc &#8212; Bmi Calculator  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../_static/basic.css?v=686e5160" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=27fed22d" />
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for BmiCalc</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
+
+
+<div class="viewcode-block" id="BmiCalc">
+<a class="viewcode-back" href="../BmiCalc.html#BmiCalc.BmiCalc">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">BmiCalc</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Interface for BMI Calculation&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">weight</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">age</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">sex</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Initialize BMI Calculation</span>
+<span class="sd">        :param size: size in meters **required**</span>
+<span class="sd">        :type size: float</span>
+<span class="sd">        :param weight: weight in kg **required**</span>
+<span class="sd">        :type weight: float</span>
+<span class="sd">        :param age: age in years</span>
+<span class="sd">        :type age: int</span>
+<span class="sd">        :param sex: m or f for male or female</span>
+<span class="sd">        :type sex: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="n">size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">weight</span> <span class="o">=</span> <span class="n">weight</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sex</span> <span class="o">=</span> <span class="n">sex</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">category</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;m&#39;</span><span class="p">:</span> <span class="p">{(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">):</span> <span class="s2">&quot;Untergewicht&quot;</span><span class="p">,</span>
+                  <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">25</span><span class="p">):</span> <span class="s2">&quot;Normalgewicht&quot;</span><span class="p">,</span>
+                  <span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">30</span><span class="p">):</span> <span class="s2">&quot;Übergewicht&quot;</span><span class="p">,</span>
+                  <span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">35</span><span class="p">):</span> <span class="s2">&quot;Adipositas Grad I&quot;</span><span class="p">,</span>
+                  <span class="p">(</span><span class="mi">35</span><span class="p">,</span> <span class="mi">40</span><span class="p">):</span> <span class="s2">&quot;Adipositas Grad II&quot;</span><span class="p">,</span>
+                  <span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="mi">2</span> <span class="o">**</span> <span class="mi">63</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span> <span class="s2">&quot;Adipositas Grad III&quot;</span><span class="p">},</span>
+            <span class="s1">&#39;f&#39;</span><span class="p">:</span> <span class="p">{(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">19</span><span class="p">):</span> <span class="s2">&quot;Untergewicht&quot;</span><span class="p">,</span>
+                  <span class="p">(</span><span class="mi">19</span><span class="p">,</span> <span class="mi">24</span><span class="p">):</span> <span class="s2">&quot;Normalgewicht&quot;</span><span class="p">,</span>
+                  <span class="p">(</span><span class="mi">24</span><span class="p">,</span> <span class="mi">30</span><span class="p">):</span> <span class="s2">&quot;Übergewicht&quot;</span><span class="p">,</span>
+                  <span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">35</span><span class="p">):</span> <span class="s2">&quot;Adipositas Grad I&quot;</span><span class="p">,</span>
+                  <span class="p">(</span><span class="mi">35</span><span class="p">,</span> <span class="mi">40</span><span class="p">):</span> <span class="s2">&quot;Adipositas Grad II&quot;</span><span class="p">,</span>
+                  <span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="mi">2</span> <span class="o">**</span> <span class="mi">63</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span> <span class="s2">&quot;Adipositas Grad III&quot;</span><span class="p">},</span>
+            <span class="kc">None</span><span class="p">:</span> <span class="p">{(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">18.5</span><span class="p">):</span> <span class="s2">&quot;Untergewicht&quot;</span><span class="p">,</span>
+                   <span class="p">(</span><span class="mf">18.5</span><span class="p">,</span> <span class="mi">25</span><span class="p">):</span> <span class="s2">&quot;Normalgewicht&quot;</span><span class="p">,</span>
+                   <span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">30</span><span class="p">):</span> <span class="s2">&quot;Übergewicht&quot;</span><span class="p">,</span>
+                   <span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">35</span><span class="p">):</span> <span class="s2">&quot;Adipositas Grad I&quot;</span><span class="p">,</span>
+                   <span class="p">(</span><span class="mi">35</span><span class="p">,</span> <span class="mi">40</span><span class="p">):</span> <span class="s2">&quot;Adipositas Grad II&quot;</span><span class="p">,</span>
+                   <span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="mi">2</span> <span class="o">**</span> <span class="mi">63</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span> <span class="s2">&quot;Adipositas Grad III&quot;</span><span class="p">}}</span>
+
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">ideal_bmi_table</span> <span class="o">=</span> <span class="p">{(</span><span class="mi">19</span><span class="p">,</span> <span class="mi">24</span><span class="p">):</span> <span class="p">(</span><span class="mi">19</span><span class="p">,</span> <span class="mi">24</span><span class="p">),</span>
+                          <span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">34</span><span class="p">):</span> <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">25</span><span class="p">),</span>
+                          <span class="p">(</span><span class="mi">35</span><span class="p">,</span> <span class="mi">44</span><span class="p">):</span> <span class="p">(</span><span class="mi">21</span><span class="p">,</span> <span class="mi">26</span><span class="p">),</span>
+                          <span class="p">(</span><span class="mi">45</span><span class="p">,</span> <span class="mi">54</span><span class="p">):</span> <span class="p">(</span><span class="mi">22</span><span class="p">,</span> <span class="mi">27</span><span class="p">),</span>
+                          <span class="p">(</span><span class="mi">55</span><span class="p">,</span> <span class="mi">65</span><span class="p">):</span> <span class="p">(</span><span class="mi">23</span><span class="p">,</span> <span class="mi">28</span><span class="p">),</span>
+                          <span class="p">(</span><span class="mi">65</span><span class="p">,</span> <span class="mi">2</span> <span class="o">**</span> <span class="mi">63</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span> <span class="p">(</span><span class="mi">24</span><span class="p">,</span> <span class="mi">29</span><span class="p">)}</span>
+
+<div class="viewcode-block" id="BmiCalc.get_bmi">
+<a class="viewcode-back" href="../BmiCalc.html#BmiCalc.BmiCalc.get_bmi">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_bmi</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; :return: current BMI &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">weight</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="BmiCalc.get_category">
+<a class="viewcode-back" href="../BmiCalc.html#BmiCalc.BmiCalc.get_category">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_category</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: current weight category as string</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">bmi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_bmi</span><span class="p">()</span>
+        <span class="n">categories</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">category</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sex</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">category</span><span class="p">[</span><span class="kc">None</span><span class="p">])</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">lower</span><span class="p">,</span> <span class="n">upper</span><span class="p">),</span> <span class="n">category</span> <span class="ow">in</span> <span class="n">categories</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">lower</span> <span class="o">&lt;=</span> <span class="n">bmi</span> <span class="o">&lt;</span> <span class="n">upper</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">category</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;BMI category could not be determined.&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="BmiCalc.get_age">
+<a class="viewcode-back" href="../BmiCalc.html#BmiCalc.BmiCalc.get_age">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_age</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; get current age</span>
+<span class="sd">        :return: current age</span>
+<span class="sd">        :rtype: int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">age</span></div>
+
+
+<div class="viewcode-block" id="BmiCalc.set_age">
+<a class="viewcode-back" href="../BmiCalc.html#BmiCalc.BmiCalc.set_age">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_age</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">age</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Set new or reset age</span>
+<span class="sd">        :param age: new age or None to reset</span>
+<span class="sd">        :type age: Optional(int)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">age</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">age</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Age must be an integer&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">age</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Age must be greater than or equal to 0&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span></div>
+
+
+<div class="viewcode-block" id="BmiCalc.get_sex">
+<a class="viewcode-back" href="../BmiCalc.html#BmiCalc.BmiCalc.get_sex">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_sex</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; get current sex as &#39;m&#39; or &#39;f&#39;</span>
+<span class="sd">        :return: current sex only &#39;m&#39; or &#39;f&#39;</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sex</span></div>
+
+
+<div class="viewcode-block" id="BmiCalc.set_sex">
+<a class="viewcode-back" href="../BmiCalc.html#BmiCalc.BmiCalc.set_sex">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_sex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sex</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Set new or reset sex</span>
+<span class="sd">        :param sex: new sex as &#39;m&#39; or &#39;f&#39; or None to reset</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">sex</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;m&#39;</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Sex must be either None, &#39;m&#39; &#39;f&#39;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sex</span> <span class="o">=</span> <span class="n">sex</span></div>
+
+
+<div class="viewcode-block" id="BmiCalc.get_size">
+<a class="viewcode-back" href="../BmiCalc.html#BmiCalc.BmiCalc.get_size">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_size</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; get current size</span>
+<span class="sd">        :return: current size in meters</span>
+<span class="sd">        :rtype: float</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span></div>
+
+
+<div class="viewcode-block" id="BmiCalc.set_size">
+<a class="viewcode-back" href="../BmiCalc.html#BmiCalc.BmiCalc.set_size">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Set new size in meters</span>
+<span class="sd">        :param size: new size</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Size must be a float&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">size</span> <span class="o">&lt;=</span> <span class="mf">0.0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Size must be greater than 0&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="n">size</span></div>
+
+
+<div class="viewcode-block" id="BmiCalc.get_weight">
+<a class="viewcode-back" href="../BmiCalc.html#BmiCalc.BmiCalc.get_weight">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_weight</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; get current weight</span>
+<span class="sd">        :return: current weight in kg</span>
+<span class="sd">        :rtype: float</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">weight</span></div>
+
+
+<div class="viewcode-block" id="BmiCalc.set_weight">
+<a class="viewcode-back" href="../BmiCalc.html#BmiCalc.BmiCalc.set_weight">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_weight</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weight</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Set new weight in meters</span>
+<span class="sd">        :param weight: new weight</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">weight</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Weight must be a float&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">weight</span> <span class="o">&lt;=</span> <span class="mf">0.0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Weight must be greater than 0&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">weight</span> <span class="o">=</span> <span class="n">weight</span></div>
+
+
+<div class="viewcode-block" id="BmiCalc.get_ideal_weight">
+<a class="viewcode-back" href="../BmiCalc.html#BmiCalc.BmiCalc.get_ideal_weight">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_ideal_weight</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; calculate ideal weight</span>
+<span class="sd">        :return:  in kg</span>
+<span class="sd">        :rtype: float</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ideal_bmi</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">categories</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">category</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sex</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">category</span><span class="p">[</span><span class="kc">None</span><span class="p">])</span>
+            <span class="k">for</span> <span class="p">(</span><span class="n">lower_bmi</span><span class="p">,</span> <span class="n">upper_bmi</span><span class="p">),</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">categories</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">label</span> <span class="o">==</span> <span class="s2">&quot;Normalgewicht&quot;</span><span class="p">:</span>
+                    <span class="n">ideal_bmi</span> <span class="o">=</span> <span class="p">(</span><span class="n">lower_bmi</span> <span class="o">+</span> <span class="n">upper_bmi</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="p">(</span><span class="n">lower_age</span><span class="p">,</span> <span class="n">upper_age</span><span class="p">),</span> <span class="p">(</span><span class="n">lower_bmi</span><span class="p">,</span> <span class="n">upper_bmi</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ideal_bmi_table</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">lower_age</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">&lt;=</span> <span class="n">upper_age</span><span class="p">:</span>
+                    <span class="n">ideal_bmi</span> <span class="o">=</span> <span class="p">(</span><span class="n">lower_bmi</span> <span class="o">+</span> <span class="n">upper_bmi</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+
+        <span class="k">if</span> <span class="n">ideal_bmi</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Ideal BMI must be greater than 0&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">ideal_bmi</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Bmi Calculator</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">Modules</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2025, Tim Schuette, Domink Elias Hase.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.1.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
